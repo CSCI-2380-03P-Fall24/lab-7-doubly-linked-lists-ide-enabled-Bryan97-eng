@@ -46,10 +46,47 @@
 	}
 
 	//add a Node with a student to the back (tail) of the list.
-	void StudentList::addBack(Student s) {}
+	void StudentList::addBack(Student s) {
+		Node* newStudent = new Node(s);
+		
+		if(head == nullptr){
+			head = tail = newStudent;
+
+		} else {
+			tail->prev = newStudent;
+			newStudent->prev = tail;
+			tail = newStudent;
+
+		}
+		numStudents++;
+	
+
+	}
 
 	//Print out the names of each student in the list.
-	void StudentList::printList() {}
+	void StudentList::printList() {
+		
+		if(head == nullptr){
+			cout << "empty list" << endl; 
+			return -1; 
+		} else {
+			while (head !== nullptr){
+				
+				cout << name << endl; 
+				
+
+
+
+			}
+
+
+
+
+
+		}
+
+
+	}
 
 	// Remove the Node with the student at the back (tail) of the list
 	// should not fail if list is empty! Print an error message if this occurs
