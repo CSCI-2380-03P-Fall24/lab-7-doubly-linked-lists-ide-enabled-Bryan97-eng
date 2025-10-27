@@ -136,14 +136,21 @@
 	void StudentList::insertStudent(Student s, int index) {
 
 		if(head == nullptr){
+
 			cout << "Empty list\n";
 			addBack(s);
+			
 		} else if (index <= 0) {
+
         addFront(s);
+
    		} else if (index >= numStudents) {
+
         cout << "Outside of list range!\n";
         addBack(s);
+
   		  } else {
+
         Node* newStudent = new Node(s);
         Node* temp = head;
         for (int i = 0; i < index; i++) {
@@ -151,12 +158,18 @@
         }
         newStudent->next = temp;
         newStudent->prev = temp->prev;
-        temp->prev->next = newStudent;
+		if(temp->prev != nullptr){
+			 temp->prev->next = newStudent;
+		}
+       
         temp->prev = newStudent;
+		if(temp == head){
+			head = newStudent;
+		}
 
         numStudents++;
     }
-	
+
 	}
 
 	//find the student with the given id number and return them
