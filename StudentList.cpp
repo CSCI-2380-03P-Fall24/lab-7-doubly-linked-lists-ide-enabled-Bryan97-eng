@@ -15,16 +15,16 @@
 		
 		if(head == nullptr){
 			cout << "empty list" << endl; 
-			return -1; 
+			return 0; 
 		} else {
-			int student_count = 0; 
+			int counter = 0;
 			Node* temp = head;
 			while(temp != nullptr){
 				temp = temp->next;
-				student_count++; 
+				counter++; 
 				
 			}
-			return student_count; 
+			return counter; 
 		}
 		
 	}
@@ -37,6 +37,7 @@
 			head = tail = newStudent;
 
 		} else {
+			newStudent->next = head;
 			head->prev = newStudent;
 			head = newStudent;
 
@@ -53,7 +54,7 @@
 			head = tail = newStudent;
 
 		} else {
-			tail->prev = newStudent;
+			tail->next = newStudent;
 			newStudent->prev = tail;
 			tail = newStudent;
 
@@ -68,22 +69,14 @@
 		
 		if(head == nullptr){
 			cout << "empty list" << endl; 
-			return -1; 
-		} else {
-			while (head !== nullptr){
+			return; 
+		} 
+			Node* temp = head;
+			while (head != nullptr){
+				cout << temp->data.name << endl; 
+				temp = temp->next;
 				
-				cout << name << endl; 
-				
-
-
-
 			}
-
-
-
-
-
-		}
 
 
 	}
@@ -91,12 +84,48 @@
 	// Remove the Node with the student at the back (tail) of the list
 	// should not fail if list is empty! Print an error message if this occurs
 	// Don't forget that your head and tail pointers will be null pointers if the list is empty
-	void StudentList::popBack() {}
+	void StudentList::popBack() {
+		if(head == nullptr){
+			cout << "cannot pop" << endl;
+			return;
+		}
+		if(head == tail){
+			delete head;
+			head = nullptr;
+			tail = nullptr;
+			return;
+
+		}
+
+		Node* temp = tail;
+		tail = tail->prev;
+		tail->next = nullptr;
+		delete temp; 
+
+
+	}
 
 	// Remove the Node with the student at the front (head) of the list
 	// should not fail if list is empty! Print an error message if this occurs
 	// Don't forget that your head and tail pointers will be null pointers if the list is empty
-	void StudentList::popFront() {}
+	void StudentList::popFront() {
+		if(head == nullptr){
+			cout << "cannot pop";
+			return;
+		}
+		if(head == tail){
+			 delete head;
+        	head = nullptr;
+        	tail = nullptr;
+        	return;
+		}
+
+		 Node* temp = head;
+		 head = head->next;
+		 head->prev = nullptr;
+		 delete temp;
+
+	}
 
 	//insert a student at the position "index".
 	// for this list, count head as index 0
@@ -104,7 +133,31 @@
 	// print a message and insert the student at the back of the list
 	// the previous Node at your target index should be moved forward. "For exampe, Node with student at index i, becomes index i+1" 
 	// Remember that you already have methods that can add students to the front or back of list if needed! Don't repeat this code.
-	void StudentList::insertStudent(Student s, int index) {}
+	void StudentList::insertStudent(Student s, int index) {
+
+		if(head == nullptr){
+			cout << "Empty list\n";
+			addBack(s);
+		} else if (index <= 0) {
+        addFront(s);
+   		} else if (index >= numStudents) {
+        cout << "Outside of list range!\n";
+        addBack(s);
+  		  } else {
+        Node* newStudent = new Node(s);
+        Node* temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp->next;
+        }
+        newStudent->next = temp;
+        newStudent->prev = temp->prev;
+        temp->prev->next = newStudent;
+        temp->prev = newStudent;
+
+        numStudents++;
+    }
+	
+	}
 
 	//find the student with the given id number and return them
 	// if no student matches, print a message 
