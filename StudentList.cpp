@@ -72,7 +72,7 @@
 			return; 
 		} 
 			Node* temp = head;
-			while (head != nullptr){
+			while (temp != nullptr){
 				cout << temp->data.name << endl; 
 				temp = temp->next;
 				
@@ -176,13 +176,41 @@
 	// if no student matches, print a message 
 	// and create and return a dummy student object
 	Student StudentList::retrieveStudent(int idNum) {
-		Student fixthis;
-		return fixthis;
+		Node* temp = head; 
+		while(temp != nullptr){
+			
+			if( temp->data.id == idNum){
+				return temp->data; 
+			}
+
+			temp = temp->next; 
+		}
+		Student dumby;
+
+		
+		return dumby;
 	}
 
 	// Remove a Node with a student from the list with a given id number
 	// If no student matches, print a message and do nothing
-	void StudentList::removeStudentById(int idNum) {}
+	void StudentList::removeStudentById(int idNum) {
+
+		Node* temp = head; 
+		while(temp != nullptr){
+			
+			if( temp->data.id == idNum){
+					// remove student node here 
+
+				// return after to stop the list 
+			}
+
+			temp = temp->next; 
+		}
+
+		cout << "No student found\n";
+
+
+	}
 
 	//Change the gpa of the student with given id number to newGPA
 	void StudentList::updateGPA(int idNum, float newGPA) {}
