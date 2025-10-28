@@ -199,7 +199,16 @@
 		while(temp != nullptr){
 			
 			if( temp->data.id == idNum){
-					// remove student node here 
+				if (temp->prev){
+				 temp->prev->next = temp->next;
+				}else {
+				head = temp->next; 
+				}
+				if (temp->next){
+					 temp->next->prev = temp->prev;
+				}else{ 
+					tail = temp->prev;
+				}
 
 				// return after to stop the list 
 			}
